@@ -1,7 +1,7 @@
 # Личный проект «Кекстаграм»
 
 * Студент: [Сергей Никитин](https://up.htmlacademy.ru/javascript-individual/2/user/2514051).
-* Наставник: `Неизвестно`.
+* Наставник: [Андрей Устименко](https://htmlacademy.ru/profile/spiritmoon).
 
 ---
 
