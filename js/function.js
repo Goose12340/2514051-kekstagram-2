@@ -22,6 +22,11 @@ function isStrPalyndrom(str) {
 
 
 function removeNum(str) {
-  return parseInt(str, 10);
+  const numberStr = String(str).replaceAll(/\D/g, '');
+
+  const num = parseInt(numberStr, 10);
+
+  return Number.isNaN(num) ? NaN : num;
+
 }
 
