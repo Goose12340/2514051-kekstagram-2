@@ -23,9 +23,7 @@ const photoMass = () => {
 
 photoMass();
 
-const photoDescription = (str) => {
-  return str;
-};
+const photoDescription = (str) => str;
 
 photoDescription('Здесь мы живем');
 
