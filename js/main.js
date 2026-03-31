@@ -22,3 +22,27 @@ const photoMass = () => {
 };
 
 photoMass();
+
+const photoDescription = (str) => {
+  return str;
+};
+
+photoDescription('Здесь мы живем');
+
+
+const likes = () => {
+  const randomLikes = Math.floor(Math.random() * 200) + 15;
+  return randomLikes;
+};
+
+likes();
+
+const avatarMass = () => {
+  const avatarMas = Array.from({ length: 6 }, () => {
+    const randomAva = Math.floor(Math.random() * 6) + 1;
+    return { avatar:`img/avatar-${randomAva}.svg` };
+  });
+  return avatarMas;
+};
+avatarMass();
+
