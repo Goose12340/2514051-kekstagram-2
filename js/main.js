@@ -6,7 +6,6 @@ const COMMENTS_MAX = 30;
 const AVATAR_MIN = 1;
 const AVATAR_MAX = 6;
 
-
 const MESSAGES = [
   'Всё отлично!',
   'В целом всё неплохо. Но не всё.',
@@ -16,12 +15,10 @@ const MESSAGES = [
   'Лица у людей на фотке перекошены, как будто их избивают. Как можно было поймать такой неудачный момент?!'
 ];
 
-
 const NAMES = [
   'Анна', 'Максим', 'Елена', 'Дмитрий', 'Ольга',
   'Иван', 'Мария', 'Сергей', 'Татьяна', 'Алексей'
 ];
-
 
 const DESCRIPTIONS = [
   'Красивый закат на море', 'Прогулка по осеннему парку', 'Мой кот спит в коробке',
@@ -34,54 +31,32 @@ const DESCRIPTIONS = [
   'Концерт любимой группы'
 ];
 
-
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
+const createComment = () => ({
+  avatar: 'img/avatar-' + getRandomInt(AVATAR_MIN, AVATAR_MAX) + '.svg',
+  message: MESSAGES[getRandomInt(0, MESSAGES.length - 1)],
+  name: NAMES[getRandomInt(0, NAMES.length - 1)]
+});
 
-const getRandomMessage = () => {
-  const count = getRandomInt(1, 2);
-  if (count === 1) {
-    return MESSAGES[getRandomInt(0, MESSAGES.length - 1)];
-  }
-  const idx1 = getRandomInt(0, MESSAGES.length - 1);
-  let idx2 = getRandomInt(0, MESSAGES.length - 1);
-  while (idx2 === idx1 && MESSAGES.length > 1) {
-    idx2 = getRandomInt(0, MESSAGES.length - 1);
-  }
-  return `${MESSAGES[idx1]} ${MESSAGES[idx2]}`;
+const createPhoto = (id, description) => {
+  const commentsCount = getRandomInt(COMMENTS_MIN, COMMENTS_MAX);
+  const comments = Array.from({ length: commentsCount }, (_, index) => ({
+    id: index + 1,
+    ...createComment()
+  }));
+
+  return {
+    id,
+    url: 'photos/' + id + '_.jpg',
+    description,
+    likes: getRandomInt(LIKES_MIN, LIKES_MAX),
+    comments
+  };
 };
 
-
-const generateComments = (commentIdCounter, count) => {
-  const comments = [];
-  for (let i = 0; i < count; i++) {
-    comments.push({
-      id: commentIdCounter.value++,
-      avatar: `img/avatar-${getRandomInt(AVATAR_MIN, AVATAR_MAX)}.svg`,
-      message: getRandomMessage(),
-      name: NAMES[getRandomInt(0, NAMES.length - 1)]
-    });
-  }
-  return comments;
-};
-
-
-const createGallery = () => {
-  const commentIdCounter = { value: 1 };
-
-  return Array.from({ length: PHOTOS_COUNT }, (_, index) => {
-    const id = index + 1;
-    const commentsCount = getRandomInt(COMMENTS_MIN, COMMENTS_MAX);
-
-    return {
-      id,
-      url: `photos/${id}_.jpg`,
-      description: DESCRIPTIONS[index],
-      likes: getRandomInt(LIKES_MIN, LIKES_MAX),
-      comments: generateComments(commentIdCounter, commentsCount)
-    };
-  });
-};
+const createGallery = (count = PHOTOS_COUNT) =>
+  Array.from({ length: count }, (_, index) => createPhoto(index + 1, DESCRIPTIONS[index]));
 
 createGallery();
 
