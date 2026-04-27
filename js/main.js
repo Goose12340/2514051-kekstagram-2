@@ -34,7 +34,7 @@ const DESCRIPTIONS = [
 const getRandomInt = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
 
 const createComment = () => ({
-  avatar: 'img/avatar-' + getRandomInt(AVATAR_MIN, AVATAR_MAX) + '.svg',
+  avatar:  `img/avatar- ${getRandomInt(AVATAR_MIN, AVATAR_MAX)} + .svg`,
   message: MESSAGES[getRandomInt(0, MESSAGES.length - 1)],
   name: NAMES[getRandomInt(0, NAMES.length - 1)]
 });
@@ -48,7 +48,7 @@ const createPhoto = (id, description) => {
 
   return {
     id,
-    url: 'photos/' + id + '_.jpg',
+    url: `photos/ ${(id, '_.jpg')}`,
     description,
     likes: getRandomInt(LIKES_MIN, LIKES_MAX),
     comments
